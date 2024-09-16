@@ -2,27 +2,52 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="refresh" content="5;url=https://samba04ngom.github.io/test/index.html">
     <title>Exécution en cours...</title>
+    <style>
+        /* Styles pour masquer et afficher les différentes sections */
+        #loadingMessage, #successMessage {
+            display: none;
+        }
+        #loadingMessage.active, #successMessage.active {
+            display: block;
+        }
+    </style>
     <script>
-        // Envoyer une requête POST à votre webhook Home Assistant
-        fetch('https://smartclim-enoleo.duckdns.org:8123/api/webhook/-k5M7C1dVbGbVNZ0_XFxD_0Pw', {
-            method: 'POST',
-        })
-        .then(response => {
-            // Si la requête est réussie, rediriger après un court délai
-            console.log('Webhook exécuté avec succès');
-            setTimeout(() => {
-                window.location.href = 'https://samba04ngom.github.io/test/index.html';
-            }, 2000); // Délai de 2 secondes avant la redirection
-        })
-        .catch(error => {
-            console.error('Erreur lors de l\'exécution du webhook:', error);
+        document.addEventListener('DOMContentLoaded', function() {
+            // Affiche le message de chargement
+            document.getElementById('loadingMessage').classList.add('active');
+
+            // Envoyer une requête POST à votre webhook Home Assistant
+            fetch('https://smartclim-enoleo.duckdns.org:8123/api/webhook/-k5M7C1dVbGbVNZ0_XFxD_0Pw', {
+                method: 'POST',
+            })
+            .then(response => {
+                console.log('Webhook exécuté avec succès');
+                
+                // Masquer le message de chargement et afficher le message de succès
+                document.getElementById('loadingMessage').classList.remove('active');
+                document.getElementById('successMessage').classList.add('active');
+            })
+            .catch(error => {
+                console.error('Erreur lors de l\'exécution du webhook:', error);
+                // Vous pouvez ajouter un message d'erreur ici si nécessaire
+            });
         });
     </script>
 </head>
 <body>
-    <h1>Exécution en cours...</h1>
-    <p>Votre climatisation est en cours de traitement. Vous serez redirigé vers la page de confirmation sous peu.</p>
+    <!-- Message affiché pendant l'exécution du webhook -->
+    <div id="loadingMessage">
+        <h1>Exécution en cours...</h1>
+        <p>Votre climatisation est en cours de traitement. Veuillez patienter...</p>
+    </div>
+
+    <!-- Message affiché après la réussite de l'exécution du webhook -->
+    <div id="successMessage">
+        <h1>Succès !</h1>
+        <p>La climatisation a été togglée avec succès.</p>
+    </div>
 </body>
 </html>
+
+     
