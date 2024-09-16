@@ -2,6 +2,7 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Exécution en cours...</title>
     <style>
         /* Styles pour masquer et afficher les différentes sections */
@@ -14,15 +15,16 @@
     </style>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            // Affiche le message de chargement
+            // Afficher le message de chargement
             document.getElementById('loadingMessage').classList.add('active');
 
             // Envoyer une requête POST à votre webhook Home Assistant
             fetch('https://smartclim-enoleo.duckdns.org:8123/api/webhook/-IcbpC8X7lsyfJzpaDTRnprXf', {
-                 method: 'POST',
+                method: 'POST',
                 headers: {
-                    'Content-Type': 'application/json'
-                },
+                    'Content-Type': 'application/json',  
+                    'Authorization': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiI2M2ExZjY1NmUwYWE0ZGYzYjQ5NDQyMTQ2ZWU3ZjE0NSIsImlhdCI6MTcyNjQ5NTI2MywiZXhwIjoyMDQxODU1MjYzfQ.S5PlhxgHzg3JyPwkQKn9qORT-dmMwha_2OKRwsmH-IE'
+                }
             })
             .then(response => {
                 if (response.ok) {
