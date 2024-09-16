@@ -5,10 +5,10 @@
     <title>Exécution en cours...</title>
     <style>
         /* Styles pour masquer et afficher les différentes sections */
-        #loadingMessage, #successMessage {
+        #loadingMessage, #successMessage, #errorMessage {
             display: none;
         }
-        #loadingMessage.active, #successMessage.active {
+        #loadingMessage.active, #successMessage.active, #errorMessage.active {
             display: block;
         }
     </style>
@@ -20,24 +20,35 @@
             // Envoyer une requête POST à votre webhook Home Assistant
             fetch('https://smartclim-enoleo.duckdns.org:8123/api/webhook/-IcbpC8X7lsyfJzpaDTRnprXf', {
                 method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
             })
             .then(response => {
-                console.log('Webhook exécuté avec succès');
-                
-                // Masquer le message de chargement et afficher le message de succès
-                document.getElementById('loadingMessage').classList.remove('active');
-                document.getElementById('successMessage').classList.add('active');
+                if (response.ok) {
+                    console.log('Webhook exécuté avec succès');
+                    // Masquer le message de chargement et afficher le message de succès
+                    document.getElementById('loadingMessage').classList.remove('active');
+                    document.getElementById('successMessage').classList.add('active');
+                } else {
+                    console.error('Erreur dans la réponse du serveur:', response.statusText);
+                    // Masquer le message de chargement et afficher le message d'erreur
+                    document.getElementById('loadingMessage').classList.remove('active');
+                    document.getElementById('errorMessage').classList.add('active');
+                }
             })
             .catch(error => {
                 console.error('Erreur lors de l\'exécution du webhook:', error);
-                // Vous pouvez ajouter un message d'erreur ici si nécessaire
+                // Afficher un message d'erreur en cas d'échec de la requête
+                document.getElementById('loadingMessage').classList.remove('active');
+                document.getElementById('errorMessage').classList.add('active');
             });
         });
     </script>
 </head>
 <body>
     <!-- Message affiché pendant l'exécution du webhook -->
-    <div id="loadingMessage">
+    <div id="loadingMessage" class="active">
         <h1>Exécution en cours...</h1>
         <p>Votre climatisation est en cours de traitement. Veuillez patienter...</p>
     </div>
@@ -47,7 +58,11 @@
         <h1>Succès !</h1>
         <p>La climatisation a été togglée avec succès.</p>
     </div>
+
+    <!-- Message affiché en cas d'erreur -->
+    <div id="errorMessage">
+        <h1>Erreur</h1>
+        <p>Il y a eu une erreur lors de l'exécution de la commande. Veuillez réessayer plus tard.</p>
+    </div>
 </body>
 </html>
-
-     
