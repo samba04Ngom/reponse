@@ -40,11 +40,12 @@
                 }
             })
             .catch(error => {
-                console.error('Erreur lors de l\'exécution du webhook:', error);
-                // Afficher un message d'erreur en cas d'échec de la requête
+                console.error('Erreur lors de l\'exécution du webhook:', error.message);
+                console.error('Détails de l\'erreur:', error);
                 document.getElementById('loadingMessage').classList.remove('active');
                 document.getElementById('errorMessage').classList.add('active');
             });
+
         });
     </script>
 </head>
