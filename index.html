@@ -1,71 +1,15 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Exécution en cours...</title>
-    <style>
-        /* Styles pour masquer et afficher les différentes sections */
-        #loadingMessage, #successMessage, #errorMessage {
-            display: none;
-        }
-        #loadingMessage.active, #successMessage.active, #errorMessage.active {
-            display: block;
-        }
-    </style>
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // Afficher le message de chargement
-            document.getElementById('loadingMessage').classList.add('active');
-
-            // Envoyer une requête POST à votre webhook Home Assistant
-            fetch('https://smartclim-enoleo.duckdns.org:8123/api/webhook/-IcbpC8X7lsyfJzpaDTRnprXf', {
-                method: 'GET',
-                headers: {
-                    'Content-Type': 'application/json',  
-                    'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiI2M2ExZjY1NmUwYWE0ZGYzYjQ5NDQyMTQ2ZWU3ZjE0NSIsImlhdCI6MTcyNjQ5NTI2MywiZXhwIjoyMDQxODU1MjYzfQ.S5PlhxgHzg3JyPwkQKn9qORT-dmMwha_2OKRwsmH-IE'
-                }
-            })
-            .then(response => {
-                if (response.ok) {
-                    console.log('Webhook exécuté avec succès');
-                    // Masquer le message de chargement et afficher le message de succès
-                    document.getElementById('loadingMessage').classList.remove('active');
-                    document.getElementById('successMessage').classList.add('active');
-                } else {
-                    console.error('Erreur dans la réponse du serveur:', response.statusText);
-                    // Masquer le message de chargement et afficher le message d'erreur
-                    document.getElementById('loadingMessage').classList.remove('active');
-                    document.getElementById('errorMessage').classList.add('active');
-                }
-            })
-            .catch(error => {
-                console.error('Erreur lors de l\'exécution du webhook:', error.message);
-                console.error('Détails de l\'erreur:', error);
-                document.getElementById('loadingMessage').classList.remove('active');
-                document.getElementById('errorMessage').classList.add('active');
-            });
-
-        });
-    </script>
-</head>
-<body>
-    <!-- Message affiché pendant l'exécution du webhook -->
-    <div id="loadingMessage" class="active">
-        <h1>Exécution en cours...</h1>
-        <p>Votre climatisation est en cours de traitement. Veuillez patienter...</p>
-    </div>
-
-    <!-- Message affiché après la réussite de l'exécution du webhook de home -->
-    <div id="successMessage">
-        <h1>Succès !</h1>
-        <p>La climatisation a été togglée avec succès.</p>
-    </div>
-
-    <!-- Message affiché en cas d'erreur -->
-    <div id="errorMessage">
-        <h1>Erreur</h1>
-        <p>Il y a eu une erreur lors de l'exécution de la commande. Veuillez réessayer plus tard.</p>
-    </div>
-</body>
+<!doctype html>
+<!-- File /config/www/test_webhook.html to open using http(s)://YOURINSTANCE:PORT/local/test_webhook.html -->
+<html>
+    <head>
+<script type="text/javascript">
+window.onload = function() {
+fetch("https://smartclim-enoleo.duckdns.org:8123/api/webhook/-IcbpC8X7lsyfJzpaDTRnprXf", { method: "POST", });
+  }
+</script>
+        <title>Test Webhook</title>
+    </head>
+    <body>
+        test
+    </body>
 </html>
