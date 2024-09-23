@@ -47,13 +47,7 @@
         fetch("https://smartclim-enoleo.duckdns.org:8123/api/webhook/-IcbpC8X7lsyfJzpaDTRnprXf", { 
             method: "POST"
         })
-        .then(response => {
-            if (response.ok) {
-                alert("La climatisation a été togglée avec succès !");
-            } else {
-                alert("Erreur lors de l'envoi du webhook : " + response.statusText);
-            }
-        })
+      
         .catch(error => {
             alert("Erreur lors de l'envoi du webhook. Détails : " + error.message);
         });
