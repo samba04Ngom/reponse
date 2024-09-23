@@ -1,17 +1,35 @@
 <!doctype html>
 <!-- File /config/www/test_webhook.html to open using http(s)://YOURINSTANCE:PORT/local/test_webhook.html -->
-<html>
-    <head>
-<script type="text/javascript">
-window.onload = function() {
-fetch("https://smartclim-enoleo.duckdns.org:8123/api/webhook/-IcbpC8X7lsyfJzpaDTRnprXf", { method: "POST", });
-  }
-</script>
-        <title>Test Webhook</title>
-        
-    </head>
-    <body>
-        La climatisation a été togglée avec succès. 
-        <img class="logo" src="C:\Users\enoleo\Desktop\DOC_Enoleo\logo_Enoleo_Vectoriel.png" alt="Logo de votre entreprise">
-    </body>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Webhook</title>
+    <script type="text/javascript">
+    window.onload = function() {
+        fetch("https://smartclim-enoleo.duckdns.org:8123/api/webhook/-IcbpC8X7lsyfJzpaDTRnprXf", { 
+            method: "POST"
+        })
+        .then(response => {
+            if (response.ok) {
+                console.log('Webhook envoyé avec succès');
+                alert("La climatisation a été togglée avec succès !");
+            } else {
+                console.error('Erreur lors de l\'envoi du webhook :', response.statusText);
+                alert("Erreur lors de l'envoi du webhook : " + response.statusText);
+            }
+        })
+        .catch(error => {
+            console.error('Erreur réseau ou autre :', error);
+            alert("Erreur lors de l'envoi du webhook. Détails : " + error.message);
+        });
+      }
+    </script>
+</head>
+<body>
+    <h1>Test Webhook</h1>
+    <p>La climatisation a été togglée avec succès.</p>
+    <!-- Correction du chemin de l'image -->
+    <img class="logo" src="/local/logo_Enoleo_Vectoriel.png" alt="Logo de votre entreprise">
+</body>
 </html>
