@@ -1,10 +1,47 @@
 <!doctype html>
-<!-- File /config/www/test_webhook.html to open using http(s)://YOURINSTANCE:PORT/local/test_webhook.html -->
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bienvenu</title>
+    <title>Test Webhook</title>
+
+    <!-- Styles pour la mise en page et la réactivité -->
+    <style>
+        body {
+            max-width: 100vw;
+            margin: 0;
+            padding: 0;
+            font-size: 16px;
+            line-height: 1.6;
+            font-family: Arial, sans-serif;
+        }
+
+        h1, p {
+            margin: 0 10px;
+            text-align: center;
+        }
+
+        img.logo {
+            display: block;
+            max-width: 100%;
+            height: auto;
+            margin: 20px auto;
+        }
+
+        @media screen and (max-width: 768px) {
+            body {
+                font-size: 14px;
+            }
+        }
+
+        @media screen and (max-width: 480px) {
+            body {
+                font-size: 12px;
+            }
+        }
+    </style>
+
+    <!-- Script pour l'exécution du webhook -->
     <script type="text/javascript">
     window.onload = function() {
         fetch("https://smartclim-enoleo.duckdns.org:8123/api/webhook/-IcbpC8X7lsyfJzpaDTRnprXf", { 
@@ -12,24 +49,23 @@
         })
         .then(response => {
             if (response.ok) {
-                console.log('Webhook envoyé avec succès');
                 alert("La climatisation a été togglée avec succès !");
             } else {
-                console.error('Erreur lors de l\'envoi du webhook :', response.statusText);
                 alert("Erreur lors de l'envoi du webhook : " + response.statusText);
             }
         })
         .catch(error => {
-            console.error('Erreur réseau ou autre :', error);
             alert("Erreur lors de l'envoi du webhook. Détails : " + error.message);
         });
       }
     </script>
 </head>
+
 <body>
-    <h1>Bienvenu</h1>
+    <h1>Test Webhook</h1>
     <p>La climatisation a été togglée avec succès.</p>
-    <!-- Correction du chemin de l'image -->
-    <img class="logo" src="logo_Enoleo_Vectoriel.png" alt="Logo de votre entreprise">
+
+    <!-- Chemin de l'image, remplacez 'assets' par le bon chemin si nécessaire -->
+    <img class="logo" src="assets/logo_Enoleo_Vectoriel.png" alt="Logo de votre entreprise">
 </body>
 </html>
