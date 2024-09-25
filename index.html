@@ -26,6 +26,14 @@
             color: white; /* Couleur du texte pour contraster avec l'image */
         }
 
+        h1 {
+            font-size: 2rem; /* Taille de base pour le titre */
+        }
+
+        p {
+            font-size: 1.25rem; /* Taille de base pour les paragraphes */
+        }
+
         img.logo {
             display: block;
             width: 400px; /* Largeur fixe ou max-width pour ajuster */
@@ -33,15 +41,40 @@
             margin: 20px auto;
         }
 
+        /* Media queries pour adapter la mise en page aux téléphones */
         @media screen and (max-width: 768px) {
             body {
                 font-size: 14px;
+            }
+            
+            h1 {
+                font-size: 1.75rem; /* Réduire la taille du titre */
+            }
+
+            p {
+                font-size: 1.1rem; /* Réduire la taille des paragraphes */
+            }
+
+            img.logo {
+                width: 300px; /* Réduire la taille du logo */
             }
         }
 
         @media screen and (max-width: 480px) {
             body {
                 font-size: 12px;
+            }
+            
+            h1 {
+                font-size: 1.5rem; /* Réduire encore plus le titre */
+            }
+
+            p {
+                font-size: 1rem; /* Réduire encore plus les paragraphes */
+            }
+
+            img.logo {
+                width: 200px; /* Réduire encore plus la taille du logo */
             }
         }
     </style>
@@ -52,11 +85,10 @@
         fetch("https://smartclim-enoleo.duckdns.org:8123/api/webhook/-IcbpC8X7lsyfJzpaDTRnprXf", { 
             method: "POST"
         })
-      
         .catch(error => {
             alert("Erreur lors de l'envoi du webhook. Détails : " + error.message);
         });
-      }
+    }
     </script>
 </head>
 
@@ -64,6 +96,7 @@
     <h1 style="color: green"><strong>BIENVENUE</strong></h1>
     <p style="color: black; font-size: 25px;">La climatisation a été togglée avec succès.</p>
     <p style="color: green; font-size: 28px;"><strong>Protégeons la planète, chaque geste compte pour un avenir durable.</strong></p>
+
     <!-- Chemin de l'image, remplacez 'assets' par le bon chemin si nécessaire -->
     <img class="logo" src="logo_Enoleo_Vectoriel.png" alt="Logo de votre entreprise">
 </body>
